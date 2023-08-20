@@ -1,0 +1,332 @@
+#@begin Parallel_OR #@desc Parallel OpenRefine Workflow
+#@param expression:value.toUppercase()
+#@param expression:value
+#@param expression:value.toTitlecase()
+#@param expression:grel:value.replace(/.*(COFFEE|CAFE).*/,_'COFFEE/CAFE')
+#@param expression:grel:value.replace(/.*MOBIL.*/,_'MOBILE_FOOD')
+#@param expression:grel:value.replace(/.*CONVENIEN.*/,_'CONVENIENCE_STORE')
+#@param expression:grel:value.replace(/.*KIOSK.*/,_'KIOSK')
+#@param expression:grel:value.replace(/.*(ICE_CREAM|GELATO|FROZEN_DESSERT).*/,_'FROZEN_DESSERT')
+#@param expression:grel:value.replace(/.*GROCERY.*/,_'GROCERY_STORE')
+#@param expression:grel:value.replace(/.*BANQUET.*/,_'BANQUET')
+#@param expression:grel:value.replace(/.*HERBAL.*/,_'HERBAL')
+#@param expression:grel:value.replace(/.*(JUICE|SMOOTHIE).*/,_'JUICE_BAR')
+#@param expression:grel:toString(toDate(value),'yyyy-MM-dd')
+#@param expression:grel:value.replace(/.*SHARED_KITCHEN.*/,_'SHARED_KITCHEN')
+#@param expression:value.trim()
+#@param expression:grel:value.replace(/.*CHURCH.*/,_'CHURCH')
+#@param expression:grel:value.replace(/.*GAS_STATION.*/,_'GAS_STATION')
+#@param expression:grel:value.replace(/.*(DAY\\s*CARE).*/,_'DAYCARE')
+#@param expression:grel:value.replace(/.*BAKERY.*/,_'BAKERY')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@param expression:grel:value.replace(/.*LIQUOR.*/,_'LIQUOR')
+#@param expression:grel:value.replace(/.*CANDY.*/,_'CANDY')
+#@in Address
+#@in Facility_Type_5
+#@in Address_2
+#@in Facility_Type_17
+#@in DBA_Name_1
+#@in Facility_Type_18
+#@in Facility_Type_22
+#@in Facility_Type
+#@in DBA_Name
+#@in City_1
+#@in DBA_Name_4
+#@in Address_3
+#@in Facility_Type_7
+#@in DBA_Name_8
+#@in Address_4
+#@in Results
+#@in DBA_Name_6
+#@in City
+#@in Facility_Type_20
+#@in Facility_Type_3
+#@in Facility_Type_12
+#@in Facility_Type_1
+#@in DBA_Name_7
+#@in Facility_Type_4
+#@in Facility_Type_13
+#@in Facility_Type_8
+#@in Facility_Type_10
+#@in Facility_Type_11
+#@in Facility_Type_23
+#@in DBA_Name_5
+#@in Violations
+#@in Facility_Type_19
+#@in Facility_Type_2
+#@in Facility_Type_15
+#@in Address_1
+#@in Facility_Type_9
+#@in Inspection_Type
+#@in DBA_Name_2
+#@in AKA_Name
+#@in State
+#@in AKA_Name_1
+#@in Inspection_Date
+#@in Inspection_Type_1
+#@in Facility_Type_16
+#@in Facility_Type_14
+#@in DBA_Name_3
+#@in Violations_1
+#@in Facility_Type_21
+#@in Facility_Type_6
+#@out CleanData
+#@begin core/text-transform0 #@desc Text transform on cells in column DBA Name using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in DBA_Name
+#@out DBA_Name_1
+#@end core/text-transform0
+#@begin core/text-transform1 #@desc Text transform on cells in column DBA Name using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in DBA_Name_1
+#@out DBA_Name_2
+#@end core/text-transform1
+#@begin core/mass-edit2 #@desc Mass edit cells in column DBA Name
+#@param expression:value
+#@in DBA_Name_2
+#@out DBA_Name_3
+#@end core/mass-edit2
+#@begin core/mass-edit3 #@desc Mass edit cells in column DBA Name
+#@param expression:value
+#@in DBA_Name_3
+#@out DBA_Name_4
+#@end core/mass-edit3
+#@begin core/mass-edit4 #@desc Mass edit cells in column DBA Name
+#@param expression:value
+#@in DBA_Name_4
+#@out DBA_Name_5
+#@end core/mass-edit4
+#@begin core/mass-edit5 #@desc Mass edit cells in column DBA Name
+#@param expression:value
+#@in DBA_Name_5
+#@out DBA_Name_6
+#@end core/mass-edit5
+#@begin core/mass-edit6 #@desc Mass edit cells in column DBA Name
+#@param expression:value
+#@in DBA_Name_6
+#@out DBA_Name_7
+#@end core/mass-edit6
+#@begin core/mass-edit7 #@desc Mass edit cells in column DBA Name
+#@param expression:value
+#@in DBA_Name_7
+#@out DBA_Name_8
+#@end core/mass-edit7
+#@begin core/mass-edit8 #@desc Mass edit cells in column DBA Name
+#@param expression:value
+#@in DBA_Name_8
+#@out DBA_Name_9
+#@end core/mass-edit8
+#@begin core/text-transform9 #@desc Text transform on cells in column AKA Name using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in AKA_Name
+#@out AKA_Name_1
+#@end core/text-transform9
+#@begin core/text-transform10 #@desc Text transform on cells in column AKA Name using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in AKA_Name_1
+#@out AKA_Name_2
+#@end core/text-transform10
+#@begin core/text-transform11 #@desc Text transform on cells in column Facility Type using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Facility_Type
+#@out Facility_Type_1
+#@end core/text-transform11
+#@begin core/text-transform12 #@desc Text transform on cells in column Facility Type using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Facility_Type_1
+#@out Facility_Type_2
+#@end core/text-transform12
+#@begin core/mass-edit13 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type_2
+#@out Facility_Type_3
+#@end core/mass-edit13
+#@begin core/text-transform14 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*(DAY\\s*CARE).*/, 'DAYCARE')
+#@param expression:grel:value.replace(/.*(DAY\\s*CARE).*/,_'DAYCARE')
+#@in Facility_Type_3
+#@out Facility_Type_4
+#@end core/text-transform14
+#@begin core/text-transform15 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*MOBIL.*/, 'MOBILE FOOD')
+#@param expression:grel:value.replace(/.*MOBIL.*/,_'MOBILE_FOOD')
+#@in Facility_Type_4
+#@out Facility_Type_5
+#@end core/text-transform15
+#@begin core/text-transform16 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*BANQUET.*/, 'BANQUET')
+#@param expression:grel:value.replace(/.*BANQUET.*/,_'BANQUET')
+#@in Facility_Type_5
+#@out Facility_Type_6
+#@end core/text-transform16
+#@begin core/text-transform17 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*GAS STATION.*/, 'GAS STATION')
+#@param expression:grel:value.replace(/.*GAS_STATION.*/,_'GAS_STATION')
+#@in Facility_Type_6
+#@out Facility_Type_7
+#@end core/text-transform17
+#@begin core/text-transform18 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*GROCERY.*/, 'GROCERY STORE')
+#@param expression:grel:value.replace(/.*GROCERY.*/,_'GROCERY_STORE')
+#@in Facility_Type_7
+#@out Facility_Type_8
+#@end core/text-transform18
+#@begin core/text-transform19 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*BAKERY.*/, 'BAKERY')
+#@param expression:grel:value.replace(/.*BAKERY.*/,_'BAKERY')
+#@in Facility_Type_8
+#@out Facility_Type_9
+#@end core/text-transform19
+#@begin core/text-transform20 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*LIQUOR.*/, 'LIQUOR')
+#@param expression:grel:value.replace(/.*LIQUOR.*/,_'LIQUOR')
+#@in Facility_Type_9
+#@out Facility_Type_10
+#@end core/text-transform20
+#@begin core/text-transform21 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*SHARED KITCHEN.*/, 'SHARED KITCHEN')
+#@param expression:grel:value.replace(/.*SHARED_KITCHEN.*/,_'SHARED_KITCHEN')
+#@in Facility_Type_10
+#@out Facility_Type_11
+#@end core/text-transform21
+#@begin core/text-transform22 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*CHURCH.*/, 'CHURCH')
+#@param expression:grel:value.replace(/.*CHURCH.*/,_'CHURCH')
+#@in Facility_Type_11
+#@out Facility_Type_12
+#@end core/text-transform22
+#@begin core/text-transform23 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*HERBAL.*/, 'HERBAL')
+#@param expression:grel:value.replace(/.*HERBAL.*/,_'HERBAL')
+#@in Facility_Type_12
+#@out Facility_Type_13
+#@end core/text-transform23
+#@begin core/text-transform24 #@desc Text transform on cells in column Address using expression value.trim()
+#@param expression:value.trim()
+#@in Address
+#@out Address_1
+#@end core/text-transform24
+#@begin core/text-transform25 #@desc Text transform on cells in column Address using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Address_1
+#@out Address_2
+#@end core/text-transform25
+#@begin core/text-transform26 #@desc Text transform on cells in column Address using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Address_2
+#@out Address_3
+#@end core/text-transform26
+#@begin core/mass-edit27 #@desc Mass edit cells in column Address
+#@param expression:value
+#@in Address_3
+#@out Address_4
+#@end core/mass-edit27
+#@begin core/mass-edit28 #@desc Mass edit cells in column Address
+#@param expression:value
+#@in Address_4
+#@out Address_5
+#@end core/mass-edit28
+#@begin core/text-transform29 #@desc Text transform on cells in column City using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in City
+#@out City_1
+#@end core/text-transform29
+#@begin core/mass-edit30 #@desc Mass edit cells in column City
+#@param expression:value
+#@in City_1
+#@out City_2
+#@end core/mass-edit30
+#@begin core/mass-edit31 #@desc Mass edit cells in column State
+#@param expression:value
+#@in State
+#@out State_1
+#@end core/mass-edit31
+#@begin core/text-transform32 #@desc Text transform on cells in column Inspection Type using expression value.toTitlecase()
+#@param expression:value.toTitlecase()
+#@in Inspection_Type
+#@out Inspection_Type_1
+#@end core/text-transform32
+#@begin core/mass-edit33 #@desc Mass edit cells in column Inspection Type
+#@param expression:value
+#@in Inspection_Type_1
+#@out Inspection_Type_2
+#@end core/mass-edit33
+#@begin core/text-transform34 #@desc Text transform on cells in column Violations using expression value.trim()
+#@param expression:value.trim()
+#@in Violations
+#@out Violations_1
+#@end core/text-transform34
+#@begin core/text-transform35 #@desc Text transform on cells in column Violations using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_1
+#@out Violations_2
+#@end core/text-transform35
+#@begin core/text-transform36 #@desc Text transform on cells in column Inspection Date using expression grel:toString(toDate(value),'yyyy-MM-dd')
+#@param expression:grel:toString(toDate(value),'yyyy-MM-dd')
+#@in Inspection_Date
+#@out Inspection_Date_1
+#@end core/text-transform36
+#@begin core/text-transform37 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*CONVENIEN.*/, 'CONVENIENCE STORE')
+#@param expression:grel:value.replace(/.*CONVENIEN.*/,_'CONVENIENCE_STORE')
+#@in Facility_Type_13
+#@out Facility_Type_14
+#@end core/text-transform37
+#@begin core/text-transform38 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*KIOSK.*/, 'KIOSK')
+#@param expression:grel:value.replace(/.*KIOSK.*/,_'KIOSK')
+#@in Facility_Type_14
+#@out Facility_Type_15
+#@end core/text-transform38
+#@begin core/text-transform39 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*CANDY.*/, 'CANDY')
+#@param expression:grel:value.replace(/.*CANDY.*/,_'CANDY')
+#@in Facility_Type_15
+#@out Facility_Type_16
+#@end core/text-transform39
+#@begin core/text-transform40 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*(JUICE|SMOOTHIE).*/, 'JUICE BAR')
+#@param expression:grel:value.replace(/.*(JUICE|SMOOTHIE).*/,_'JUICE_BAR')
+#@in Facility_Type_16
+#@out Facility_Type_17
+#@end core/text-transform40
+#@begin core/text-transform41 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*(COFFEE|CAFE).*/, 'COFFEE/CAFE')
+#@param expression:grel:value.replace(/.*(COFFEE|CAFE).*/,_'COFFEE/CAFE')
+#@in Facility_Type_17
+#@out Facility_Type_18
+#@end core/text-transform41
+#@begin core/text-transform42 #@desc Text transform on cells in column Facility Type using expression grel:value.replace(/.*(ICE CREAM|GELATO|FROZEN DESSERT).*/, 'FROZEN DESSERT')
+#@param expression:grel:value.replace(/.*(ICE_CREAM|GELATO|FROZEN_DESSERT).*/,_'FROZEN_DESSERT')
+#@in Facility_Type_18
+#@out Facility_Type_19
+#@end core/text-transform42
+#@begin core/mass-edit43 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type_19
+#@out Facility_Type_20
+#@end core/mass-edit43
+#@begin core/mass-edit44 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type_20
+#@out Facility_Type_21
+#@end core/mass-edit44
+#@begin core/mass-edit45 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type_21
+#@out Facility_Type_22
+#@end core/mass-edit45
+#@begin core/mass-edit46 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type_22
+#@out Facility_Type_23
+#@end core/mass-edit46
+#@begin core/mass-edit47 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type_23
+#@out Facility_Type_24
+#@end core/mass-edit47
+#@begin core/text-transform48 #@desc Text transform on cells in column Results using expression value.trim()
+#@param expression:value.trim()
+#@in Results
+#@out Results_1
+#@end core/text-transform48
+#@begin CombineDataCleaningChanges
+#@in DBA_Name_9
+#@in AKA_Name_2
+#@in Facility_Type_24
+#@in Address_5
+#@in City_2
+#@in State_1
+#@in Inspection_Type_2
+#@in Violations_2
+#@in Inspection_Date_1
+#@in Results_1
+#@out CleanData
+#@end CombineDataCleaningChanges
+#@end Parallel_OR

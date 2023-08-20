@@ -1,0 +1,119 @@
+digraph Workflow {
+rankdir=TB
+fontname=Courier; fontsize=18; labelloc=t
+label=Food_Inspection_Python_Datacleaning
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; color=white
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
+LoadDirtyDataToPandasDF
+LoadFirstStepCleanedDataToPandasDF
+CompareChangesOnDataset
+"Phrase1-DealingWithMissingData"
+"Phrase1a-DropNullValueRecords:License"
+"Phrase1b-FillNullinCity"
+"Phrase1:JoinResults"
+"Phrase2-DealingWithIncorrectFormat"
+"Phrase2a-floatToInt(License#)"
+"Phrase2b-floatToInt(Zip)"
+"Phrase2c-objectToDate(InspectionDate)"
+"Phrase2:JoinResults"
+"Phrase3-DealingWithDataInconsistency"
+"Phrase3a-CheckInconsistencyOnResult"
+"Phrase3b-CheckInconsistencyOnRisk"
+"Phrase3:JoinResults"
+"Phrase4-DiscoveringIntegrityConstraintViolation"
+"Phrase4a:Constraint:Inspection_ID_isUnique"
+"Phrase4b:Constraint:License_#_isUnique"
+"Phrase4b-FixDuplicatedPairs"
+"Phrase4c-Iterate:Constraint:Longitude_inRange"
+"Phrase4c-Iterate:Constraint:Latitude_inRange"
+"Phrase4d-Iterate:Constraint:DBA_Name_Determine_AKA_Name"
+"Phrase4:JoinResults"
+ExportToCSV
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+Food_Inspections [shape=record rankdir=LR label="{<f0> Food_Inspections |<f1> file\:\{db_pth\}\openrefine\Food_Inspections.csv}"];
+Food_Inspections_OpenRefine_cleaned [shape=record rankdir=LR label="{<f0> Food_Inspections_OpenRefine_cleaned |<f1> file\:\{db_pth\}\openrefine\Food_Inspections_openrefine.csv}"];
+Food_Inspections_Dataset
+Food_Inspections_OR_Dataset
+Food_Inspections_Initial
+Missing_Dropped
+City_Filled_Updated
+Food_Inspections_Missing_Cleaned
+"License#_Updated"
+Zip_Updated
+InspectionDate_Updated
+Food_Inspections_Format_Cleaned
+Result_Updated
+Risk_Updated
+Food_Inspections_Inconsistency_Cleaned
+"Violation_Num_License_#_isUnique"
+Address_Updated
+AKA_Name_Updated
+Food_Inspections_Constraint_Cleaned
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+LoadDirtyDataToPandasDF -> Food_Inspections_Dataset
+Food_Inspections -> LoadDirtyDataToPandasDF
+LoadFirstStepCleanedDataToPandasDF -> Food_Inspections_OR_Dataset
+Food_Inspections_OpenRefine_cleaned -> LoadFirstStepCleanedDataToPandasDF
+CompareChangesOnDataset -> Food_Inspections_Initial
+Food_Inspections_Dataset -> CompareChangesOnDataset
+Food_Inspections_OR_Dataset -> CompareChangesOnDataset
+Food_Inspections_Initial -> "Phrase1-DealingWithMissingData"
+"Phrase1a-DropNullValueRecords:License" -> Missing_Dropped
+"Phrase1-DealingWithMissingData" -> "Phrase1a-DropNullValueRecords:License"
+"Phrase1b-FillNullinCity" -> City_Filled_Updated
+"Phrase1-DealingWithMissingData" -> "Phrase1b-FillNullinCity"
+"Phrase1:JoinResults" -> Food_Inspections_Missing_Cleaned
+Missing_Dropped -> "Phrase1:JoinResults"
+City_Filled_Updated -> "Phrase1:JoinResults"
+Food_Inspections_Missing_Cleaned -> "Phrase2-DealingWithIncorrectFormat"
+"Phrase2a-floatToInt(License#)" -> "License#_Updated"
+"Phrase2-DealingWithIncorrectFormat" -> "Phrase2a-floatToInt(License#)"
+"Phrase2b-floatToInt(Zip)" -> Zip_Updated
+"Phrase2-DealingWithIncorrectFormat" -> "Phrase2b-floatToInt(Zip)"
+"Phrase2c-objectToDate(InspectionDate)" -> InspectionDate_Updated
+"Phrase2-DealingWithIncorrectFormat" -> "Phrase2c-objectToDate(InspectionDate)"
+"Phrase2:JoinResults" -> Food_Inspections_Format_Cleaned
+"License#_Updated" -> "Phrase2:JoinResults"
+Zip_Updated -> "Phrase2:JoinResults"
+InspectionDate_Updated -> "Phrase2:JoinResults"
+Food_Inspections_Format_Cleaned -> "Phrase3-DealingWithDataInconsistency"
+"Phrase3a-CheckInconsistencyOnResult" -> Result_Updated
+"Phrase3-DealingWithDataInconsistency" -> "Phrase3a-CheckInconsistencyOnResult"
+"Phrase3b-CheckInconsistencyOnRisk" -> Risk_Updated
+"Phrase3-DealingWithDataInconsistency" -> "Phrase3b-CheckInconsistencyOnRisk"
+"Phrase3:JoinResults" -> Food_Inspections_Inconsistency_Cleaned
+Result_Updated -> "Phrase3:JoinResults"
+Risk_Updated -> "Phrase3:JoinResults"
+Food_Inspections_Inconsistency_Cleaned -> "Phrase4-DiscoveringIntegrityConstraintViolation"
+"Phrase4a:Constraint:Inspection_ID_isUnique" -> Violation_Num_Inspection_ID_isUnique
+"Phrase4-DiscoveringIntegrityConstraintViolation" -> "Phrase4a:Constraint:Inspection_ID_isUnique"
+"Phrase4b:Constraint:License_#_isUnique" -> "Violation_Num_License_#_isUnique"
+"Phrase4-DiscoveringIntegrityConstraintViolation" -> "Phrase4b:Constraint:License_#_isUnique"
+"Phrase4b-FixDuplicatedPairs" -> Address_Updated
+"Violation_Num_License_#_isUnique" -> "Phrase4b-FixDuplicatedPairs"
+"Phrase4c-Iterate:Constraint:Longitude_inRange" -> Violation_Num_Longitude_inRange
+"Phrase4-DiscoveringIntegrityConstraintViolation" -> "Phrase4c-Iterate:Constraint:Longitude_inRange"
+"Phrase4c-Iterate:Constraint:Latitude_inRange" -> Violation_Num_Latitude_inRange
+"Phrase4-DiscoveringIntegrityConstraintViolation" -> "Phrase4c-Iterate:Constraint:Latitude_inRange"
+"Phrase4d-Iterate:Constraint:DBA_Name_Determine_AKA_Name" -> AKA_Name_Updated
+"Phrase4-DiscoveringIntegrityConstraintViolation" -> "Phrase4d-Iterate:Constraint:DBA_Name_Determine_AKA_Name"
+"Phrase4:JoinResults" -> Food_Inspections_Constraint_Cleaned
+Address_Updated -> "Phrase4:JoinResults"
+AKA_Name_Updated -> "Phrase4:JoinResults"
+ExportToCSV -> "Food_Inspections_py.csv"
+Food_Inspections_Constraint_Cleaned -> ExportToCSV
+}}
+subgraph cluster_input_ports_group_outer { label=""; color=white
+subgraph cluster_input_ports_group_inner { label=""; color=white
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+Food_Inspections_input_port [label=""]
+Food_Inspections_OpenRefine_cleaned_input_port [label=""]
+}}
+subgraph cluster_output_ports_group_outer { label=""; color=white
+subgraph cluster_output_ports_group_inner { label=""; color=white
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+}}
+Food_Inspections_input_port -> Food_Inspections
+Food_Inspections_OpenRefine_cleaned_input_port -> Food_Inspections_OpenRefine_cleaned
+}

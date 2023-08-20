@@ -1,0 +1,77 @@
+digraph Workflow {
+rankdir=TB
+fontname=Courier; fontsize=18; labelloc=t
+label=Food_Inspection_Overall
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; color=white
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
+"Input:Food_inspection.csv"
+Data_Cleaning_Process_with_OpenRefine
+"OpenRefine:Trim_Spaces"
+"OpenRefine:Transform_Uppercase"
+"OpenRefine:Merge_Similar"
+"OpenRefine:AddColomn"
+"OpenRefine:JoinResults"
+Data_Cleaning_Process_with_Python
+"Python:DealingWithMissingData"
+"Python:DealingWithIncorrectFormat"
+"Python:CheckInconsistencyOnResult"
+"Python:DiscoveringIntegrityConstraintViolation"
+"Python:JoinResults"
+Data_Cleaning_Process_with_SQL
+"SQL:Discover_Integrity_Constraint_Violation"
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+Food_Inspections [shape=record rankdir=LR label="{<f0> Food_Inspections |<f1> file\:\{db_pth\}\openrefine\Food_Inspections.csv}"];
+Dataset_Spaces_Trimmed
+Dataset_Transformed
+Dataset_Value_Custered
+Dataset_Column_added
+Dataset_Missing_Cleaned
+Dataset_Format_Cleaned
+Dataset_Inconsistency_Cleaned
+Dataset_Constraint_Cleaned
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+Food_Inspections -> "Input:Food_inspection.csv"
+"Input:Food_inspection.csv" -> Data_Cleaning_Process_with_OpenRefine
+"OpenRefine:Trim_Spaces" -> Dataset_Spaces_Trimmed
+Data_Cleaning_Process_with_OpenRefine -> "OpenRefine:Trim_Spaces"
+"OpenRefine:Transform_Uppercase" -> Dataset_Transformed
+Data_Cleaning_Process_with_OpenRefine -> "OpenRefine:Transform_Uppercase"
+"OpenRefine:Merge_Similar" -> Dataset_Value_Custered
+Data_Cleaning_Process_with_OpenRefine -> "OpenRefine:Merge_Similar"
+"OpenRefine:AddColomn" -> Dataset_Column_added
+Data_Cleaning_Process_with_OpenRefine -> "OpenRefine:AddColomn"
+"OpenRefine:JoinResults" -> "Food_Inspections_openrefine.csv"
+Dataset_Spaces_Trimmed -> "OpenRefine:JoinResults"
+Dataset_Transformed -> "OpenRefine:JoinResults"
+Dataset_Value_Custered -> "OpenRefine:JoinResults"
+Dataset_Column_added -> "OpenRefine:JoinResults"
+Data_Cleaning_Process_with_OpenRefine -> Data_Cleaning_Process_with_Python
+"Python:DealingWithMissingData" -> Dataset_Missing_Cleaned
+Data_Cleaning_Process_with_Python -> "Python:DealingWithMissingData"
+"Python:DealingWithIncorrectFormat" -> Dataset_Format_Cleaned
+Data_Cleaning_Process_with_Python -> "Python:DealingWithIncorrectFormat"
+"Python:CheckInconsistencyOnResult" -> Dataset_Inconsistency_Cleaned
+Data_Cleaning_Process_with_Python -> "Python:CheckInconsistencyOnResult"
+"Python:DiscoveringIntegrityConstraintViolation" -> Dataset_Constraint_Cleaned
+Data_Cleaning_Process_with_Python -> "Python:DiscoveringIntegrityConstraintViolation"
+"Python:JoinResults" -> "Food_Inspections_py.csv"
+Dataset_Missing_Cleaned -> "Python:JoinResults"
+Dataset_Format_Cleaned -> "Python:JoinResults"
+Dataset_Inconsistency_Cleaned -> "Python:JoinResults"
+Dataset_Constraint_Cleaned -> "Python:JoinResults"
+Data_Cleaning_Process_with_Python -> Data_Cleaning_Process_with_SQL
+"SQL:Discover_Integrity_Constraint_Violation" -> "Food_Inspections_sql.csv"
+Data_Cleaning_Process_with_SQL -> "SQL:Discover_Integrity_Constraint_Violation"
+}}
+subgraph cluster_input_ports_group_outer { label=""; color=white
+subgraph cluster_input_ports_group_inner { label=""; color=white
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+Food_Inspections_input_port [label=""]
+}}
+subgraph cluster_output_ports_group_outer { label=""; color=white
+subgraph cluster_output_ports_group_inner { label=""; color=white
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+}}
+Food_Inspections_input_port -> Food_Inspections
+}
